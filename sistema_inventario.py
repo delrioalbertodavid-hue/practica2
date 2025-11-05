@@ -1,5 +1,17 @@
 class Producto:
     def __init__(self, nombre, cantidad, precio):
+        try:
+            if not nombre:
+                raise ValueError("El nombre del producto no puede estar vacío.")
+                    
+            if cantidad <0:
+                raise ValueError("La cantidad del producto debe ser mayor o igual a cero.")
+                
+            if precio <0:
+                raise ValueError("El precio del producto debe ser mayor o igual a cero.")
+        except ValueError as e:
+            print(e)
+            raise
         self.nombre = nombre
         self.cantidad = cantidad
         self.precio = precio
@@ -36,14 +48,11 @@ class Inventario:
         return self
     
     def buscar_producto(self, nombre):
-        '''producto_encontrado = next(
-            (p for p in self.productos.values() if p.nombre == nombre), None)
-        if producto_encontrado:
-            return producto_encontrado
-        else:
-            return None
-        '''
-        return self.productos.get(nombre)
+        nombre = nombre.lower()
+        for producto in self.productos.values():
+            if producto.nombre.lower() == nombre:
+                return producto
+        return None
     
     def calcular_valor_inventario(self):
         valor_total = 0
