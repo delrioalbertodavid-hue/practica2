@@ -1,5 +1,5 @@
 class Producto:
-    def __init__(self, nombre, cantidad, precio):
+    def __init__(self, nombre, precio, cantidad):
         try:
             if not nombre:
                 raise ValueError("El nombre del producto no puede estar vacío.")
@@ -81,15 +81,15 @@ def menu_principal(inventario):
                 if not nombre:
                     raise ValueError("El nombre del producto no puede estar vacío.")
                     
+                precio = float(input("Ingrese el precio del producto: "))
+                if precio <0:
+                    raise ValueError("El precio del producto debe ser mayor o igual a cero.")
+                
                 cantidad = int(input("Ingrese la cantidad del producto: "))
                 if cantidad <0:
                     raise ValueError("La cantidad del producto debe ser mayor o igual a cero.")
                 
-                precio = float(input("Ingrese el precio del producto: "))
-                if precio <0:
-                    raise ValueError("El precio del producto debe ser mayor o igual a cero.")
-             
-                producto = Producto(nombre, cantidad, precio)
+                producto = Producto(nombre, precio, cantidad)
                        
                 inventario.agregar_producto(producto)
                 print("Producto agregado exitosamente.")
